@@ -16,7 +16,10 @@ func main() {
 	router.PUT("/todos/:id", updateTodo)
 	router.DELETE("/todos/:id", deleteTodo)
 
-	router.Run("localhost:8080")
+	err := router.Run("localhost:8080")
+	if err != nil {
+		return
+	}
 }
 
 func getTodos(c *gin.Context) {
@@ -35,4 +38,44 @@ func createTodo(c *gin.Context) {
 	}
 	todos[newTodo.ID] = newTodo
 	c.JSON(http.StatusCreated, newTodo)
+}
+
+func getTodo(c *gin.Context) {
+	id := c.Param("id")
+	todo, exists := todos[id]
+	if !exists {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Yikes, Todo not found"})
+		return
+	}
+	c.JSON(http.StatusOK, todo)
+}
+
+func updateTodo(c *gin.Context) {
+	id := c.Param("id")
+	var updatedTodo TodoItem
+	if err := c.ShouldBindJSON(&updatedTodo); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	_, exists := todos[id]
+	if !exists {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Yikes, Todo not found"})
+		return
+	}
+	todos[id] = updatedTodo
+	c.JSON(http.StatusOK, updatedTodo)
+}
+
+func deleteTodo(c *gin.Context) {
+	id := c.Param("id")
+	_, exists := todos[id]
+	if !exists {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Yikes, Todo not found"})
+		return
+	}
+	delete(
+		todos,
+		id,
+	)
+	c.JSON(http.StatusOK, gin.H{"message": "Todo deleted 👍."})
 }
