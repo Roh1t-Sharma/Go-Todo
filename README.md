@@ -24,7 +24,7 @@ These instructions will get you a copy of the project up and running on your loc
 1. **Clone the repository:**
 
    ```sh
-   git clone https://github.com/Roh1t-Sharma/Go-Todo
+   git clone [https://github.com/Roh1t-Sharma/Go-Todo](https://github.com/Roh1t-Sharma/Go-Todo)
    cd Go-Todo
    ```
 
