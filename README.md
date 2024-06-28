@@ -1,5 +1,8 @@
 # Todo List Application
 
+<img width="904" alt="Screenshot 2024-06-28 at 15 41 16" src="https://github.com/Roh1t-Sharma/Go-Todo/assets/118717994/3e118630-fd42-4329-903c-d89d891f6d04">
+
+
 This Todo List application is a simple, yet powerful tool to manage your daily tasks. It features a lightweight, efficient backend built with Go and the Gin framework, and a straightforward, interactive frontend using HTML, CSS, and JavaScript.
 
 ## Features
